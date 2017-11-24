@@ -5,7 +5,7 @@ CREATE TABLE pais (
 	PRIMARY KEY (idpais)
 );
 
-CREATE TABLE reservas.estado (
+CREATE TABLE estado (
 	idestado serial NOT NULL,
 	idpais int NOT NULL UNIQUE,
 	nome varchar(45) NOT NULL,
