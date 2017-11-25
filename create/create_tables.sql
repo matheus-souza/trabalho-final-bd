@@ -7,7 +7,7 @@ CREATE TABLE pais (
 
 CREATE TABLE estado (
     idestado serial NOT NULL,
-    idpais int NOT NULL UNIQUE,
+    idpais int NOT NULL,
     nome varchar(150) NOT NULL,
     uf char(2) NOT NULL,
     PRIMARY KEY (idestado)
