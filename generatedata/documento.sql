@@ -1,0 +1,1 @@
+select geraDocumentos(50);

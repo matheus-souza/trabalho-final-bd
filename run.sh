@@ -24,10 +24,12 @@ gera_dados_ficticios() {
     psql -U${usuario} -d ${base} -a -f ${sql_tmp[@]}
   done
 
+  # Lista de sqls para a geração de dados ficticios
   sqls_dados=(
     'generatedata/tipo_documento.sql'
+    'generatedata/functions/fGeraDocumentos.sql'
+    'generatedata/documento.sql'
   )
-
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
   done
