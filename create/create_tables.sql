@@ -46,7 +46,6 @@ CREATE TABLE pessoa (
 CREATE TABLE tipo_documento (
     idtipo_documento serial NOT NULL,
     descricao varchar(45) NOT NULL,
-    valor varchar(45) NOT NULL,
     PRIMARY KEY (idtipo_documento)
 );
 
