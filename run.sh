@@ -34,5 +34,4 @@ sqls=(
 
 for sql in ${sqls[@]}; do
 	psql -U${usuario} -d ${base} -a -f ${sql[@]}
-	psql -U${usuario} -d ${base} -a -f ${sql[@]}
 done
