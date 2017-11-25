@@ -1,39 +1,39 @@
 CREATE TABLE pais (
     idpais serial NOT NULL,
-    abreviacao varchar(45),
-    nome varchar(45) NOT NULL,
+    abreviacao char(3),
+    nome varchar(150) NOT NULL,
     PRIMARY KEY (idpais)
 );
 
 CREATE TABLE estado (
     idestado serial NOT NULL,
     idpais int NOT NULL UNIQUE,
-    nome varchar(45) NOT NULL,
-    uf varchar(45) NOT NULL,
+    nome varchar(150) NOT NULL,
+    uf char(2) NOT NULL,
     PRIMARY KEY (idestado)
 );
 
 CREATE TABLE cidade (
     idcidade serial NOT NULL,
     idestado int NOT NULL UNIQUE,
-    nome varchar(45) NOT NULL,
+    nome varchar(150) NOT NULL,
     PRIMARY KEY (idcidade)
 );
 
 CREATE TABLE endereco (
     idendereco serial NOT NULL,
     idcidade int NOT NULL,
-    rua varchar(45) NOT NULL,
-    bairro varchar(45) NOT NULL,
-    numero varchar(45),
+    rua varchar(150) NOT NULL,
+    bairro varchar(150) NOT NULL,
+    numero int,
     PRIMARY KEY (idendereco)
 );
 
 CREATE TABLE email (
     idemail serial NOT NULL,
     idpessoa int NOT NULL,
-    email varchar(45) NOT NULL,
-    receber_promocoes varchar(45) NOT NULL,
+    email varchar(100) NOT NULL,
+    receber_promocoes boolean NOT NULL,
     PRIMARY KEY (idemail)
 );
 
@@ -53,40 +53,40 @@ CREATE TABLE tipo_documento (
 CREATE TABLE documento (
     iddocumento serial NOT NULL,
     idtipo_documento int NOT NULL,
-    valor varchar(45) NOT NULL,
+    valor varchar(100) NOT NULL,
     PRIMARY KEY (iddocumento)
 );
 
 CREATE TABLE fisica (
     idpessoa int NOT NULL,
     iddocumento int NOT NULL,
-    nome varchar(45),
-    dt_nascimento varchar(45),
+    nome varchar(150),
+    dt_nascimento date,
     PRIMARY KEY (idpessoa)
 );
 
 CREATE TABLE juridica (
     idpessoa int NOT NULL,
     iddocumento int NOT NULL,
-    nome_fantasia varchar(45),
-    razao_social varchar(45) NOT NULL,
-    data_fundacao varchar(45),
+    nome_fantasia varchar(150),
+    razao_social varchar(150) NOT NULL,
+    data_fundacao date,
     PRIMARY KEY (idpessoa)
 );
 
 CREATE TABLE telefone (
     idtelefone serial NOT NULL,
     idpessoa int NOT NULL,
-    ddd varchar(45) NOT NULL,
-    telefone varchar(45) NOT NULL,
-    receber_promocoes varchar(45) NOT NULL,
+    ddd int NOT NULL,
+    telefone bigint NOT NULL,
+    receber_promocoes boolean NOT NULL,
     operadora varchar(45),
     PRIMARY KEY (idtelefone)
 );
 
 CREATE TABLE dia_atendimento (
     iddia_atendimento serial NOT NULL,
-    dia_semana varchar(45) NOT NULL,
+    dia_semana int NOT NULL,
     trabalha_feriado boolean NOT NULL,
     PRIMARY KEY (iddia_atendimento)
 );
@@ -94,17 +94,17 @@ CREATE TABLE dia_atendimento (
 CREATE TABLE horario_atendimento (
     idhorario_atendimento serial NOT NULL,
     iddia_atendimento int NOT NULL,
-    hora_inicio varchar(45) NOT NULL,
-    hora_fim varchar(45) NOT NULL,
+    hora_inicio time NOT NULL,
+    hora_fim time NOT NULL,
     PRIMARY KEY (idhorario_atendimento)
 );
 
 CREATE TABLE servicos (
     idservicos serial NOT NULL,
-    servico varchar(45) NOT NULL,
-    tempo_medio_atendimento varchar(45) NOT NULL,
-    aceita_desconto varchar(45) NOT NULL,
-    valor varchar(45),
+    servico varchar(150) NOT NULL,
+    tempo_medio_atendimento time NOT NULL,
+    aceita_desconto boolean NOT NULL,
+    valor decimal(8, 2),
     PRIMARY KEY (idservicos)
 );
 
@@ -112,8 +112,8 @@ CREATE TABLE reservas (
     idreservas serial NOT NULL,
     idpessoa int NOT NULL,
     iddia_atendimento int NOT NULL,
-    hora_inicio varchar(45) NOT NULL,
-    hora_fim varchar(45),
+    hora_inicio time NOT NULL,
+    hora_fim time,
     lembrete boolean NOT NULL,
     PRIMARY KEY (idreservas)
 );
