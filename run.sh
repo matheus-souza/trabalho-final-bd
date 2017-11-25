@@ -4,6 +4,13 @@ usuario=$1;
 base=$2;
 resetar_base=$3;
 
+if [[ $1 == "--help" || $1 == "-h" ]]
+then
+  echo 'Uso: ./run usuario base [resetar_base]'
+  echo 'Exemplo: ./run postgres reservas true'
+  exit
+fi
+
 if [[ -z ${usuario} ]]; then
 	echo "Informe o usuário do PostgreSQL";
 	exit 0;
