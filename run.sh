@@ -16,6 +16,14 @@ cria_tabelas_visoes_procedures() {
 }
 
 gera_dados_ficticios() {
+  # Lista tabelas com dados ficticios para uso
+  sqls_tmp=(
+    'generatedata/tmp/tmp_documento_valor.sql'
+  )
+  for sql_tmp in ${sqls_tmp[@]}; do
+    psql -U${usuario} -d ${base} -a -f ${sql_tmp[@]}
+  done
+
   sqls_dados=(
     'generatedata/tipo_documento.sql'
   )
