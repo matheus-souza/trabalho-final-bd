@@ -30,6 +30,7 @@ gera_dados_ficticios() {
     'generatedata/functions/fGeraDocumentos.sql'
     'generatedata/documento.sql'
     'generatedata/pais.sql'
+    'generatedata/estado.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
