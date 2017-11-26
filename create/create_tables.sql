@@ -15,7 +15,7 @@ CREATE TABLE estado (
 
 CREATE TABLE cidade (
     idcidade serial NOT NULL,
-    idestado int NOT NULL UNIQUE,
+    idestado int NOT NULL,
     nome varchar(150) NOT NULL,
     PRIMARY KEY (idcidade)
 );
