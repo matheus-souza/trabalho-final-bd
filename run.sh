@@ -19,6 +19,7 @@ gera_dados_ficticios() {
   # Lista tabelas com dados ficticios para uso
   sqls_tmp=(
     'generatedata/tmp/tmp_documento_valor.sql'
+    'generatedata/tmp/tmp_endereco.sql'
   )
   for sql_tmp in ${sqls_tmp[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_tmp[@]}
@@ -32,6 +33,8 @@ gera_dados_ficticios() {
     'generatedata/pais.sql'
     'generatedata/estado.sql'
     'generatedata/cidade.sql'
+    'generatedata/functions/fGeraEnderecos.sql'
+    'generatedata/endereco.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
