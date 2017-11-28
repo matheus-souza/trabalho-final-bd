@@ -35,6 +35,7 @@ gera_dados_ficticios() {
     'generatedata/cidade.sql'
     'generatedata/functions/fGeraEnderecos.sql'
     'generatedata/endereco.sql'
+    'generatedata/servicos.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
