@@ -76,8 +76,8 @@ CREATE TABLE juridica (
 CREATE TABLE telefone (
     idtelefone serial NOT NULL,
     idpessoa int NOT NULL,
-    ddd int NOT NULL,
-    telefone bigint NOT NULL,
+    ddd char(2) NOT NULL,
+    telefone varchar NOT NULL,
     receber_promocoes boolean NOT NULL,
     operadora varchar(45),
     PRIMARY KEY (idtelefone)
