@@ -21,6 +21,7 @@ gera_dados_ficticios() {
     'generatedata/tmp/tmp_documento_valor.sql'
     'generatedata/tmp/tmp_endereco.sql'
     'generatedata/tmp/tmp_nome.sql'
+    'generatedata/tmp/tmp_email.sql'
   )
   for sql_tmp in ${sqls_tmp[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_tmp[@]}
