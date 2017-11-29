@@ -1,0 +1,1 @@
+select geraTelefones(100);
