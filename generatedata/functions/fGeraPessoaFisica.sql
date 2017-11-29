@@ -35,7 +35,6 @@ BEGIN
         END;
         END IF;
     END LOOP;
-    DROP TABLE tmp_nome;
     RETURN true;
 END;
 $BODY$
