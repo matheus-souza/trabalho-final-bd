@@ -1,0 +1,1 @@
+select geraEmail(50);
