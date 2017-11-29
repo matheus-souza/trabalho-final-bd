@@ -39,6 +39,8 @@ gera_dados_ficticios() {
     'generatedata/servicos.sql'
     'generatedata/dia_atendimento.sql'
     'generatedata/horario_atendimento.sql'
+    'generatedata/functions/fGeraPessoaFisica.sql'
+    'generatedata/pessoa_fisica.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
