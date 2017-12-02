@@ -111,6 +111,7 @@ CREATE TABLE reservas (
     idreservas serial NOT NULL,
     idpessoa int NOT NULL,
     iddia_atendimento int NOT NULL,
+    data_atendimento data NOT NULL,
     hora_inicio time NOT NULL,
     hora_fim time,
     lembrete boolean NOT NULL,
