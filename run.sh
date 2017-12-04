@@ -49,6 +49,8 @@ gera_dados_ficticios() {
     'generatedata/email.sql'
     'generatedata/functions/fGeraTelefones.sql'
     'generatedata/telefone.sql'
+    'generatedata/functions/fGeraReservas.sql'
+    'generatedata/reservas.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
