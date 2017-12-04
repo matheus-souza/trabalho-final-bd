@@ -3,7 +3,7 @@
 ## Escopo do trabalho
 - [x] Modelo com um número mínimo de 15 tabelas.
 - [x] Criar as tabelas, campos e estruturas necessárias para armazenamento dos dados, usando instruções SQL (DDL).
-- [ ] Inserir um conjunto mínimo de registros em cada tabela.
+- [x] Inserir um conjunto mínimo de registros em cada tabela.
 - [ ] Descrever o enunciado de 10 consultas a serem desenvolvidas.
 - Criar as consultas, considerando as seguintes características:
   - Todas as consultas deverão apresentar mais de uma tabela na cláusula FROM e no mínimo cinco devem apresentar mais de duas tabelas.
