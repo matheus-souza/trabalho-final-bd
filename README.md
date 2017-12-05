@@ -15,7 +15,7 @@
 
 - [ ] Descrever textualmente o que faz cada trigger, procedure.
 - [x] Criar duas procedures, ou mais, para inserir dados em tabelas que devem apresentar uma grande quantidade de registros para teste das consultas.
-- [ ] Criar uma procedure que utilize um cursor para ler dados de uma ou mais tabelas e atualizar dados em outra. 
+- [x] Criar uma procedure que utilize um cursor para ler dados de uma ou mais tabelas e atualizar dados em outra. 
 - [ ] Criar duas procedures que recebam parâmetros, executem consulta baseada nestes parâmetros e retorne os dados da consulta.
  - Estas procedures devem ser utilizadas posteriormente em outra consulta na cláusula FROM.
 - [ ] Criar três triggers.
