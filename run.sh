@@ -57,6 +57,16 @@ gera_dados_ficticios() {
   done
 }
 
+roda_selects() {
+  sqls_selects=(
+    'selects/selects.sql'
+  )
+
+  for sql_select in ${sqls_selects[@]}; do
+    psql -U${usuario} -d ${base} -a -f ${sql_select[@]}
+  done
+}
+
 if [[ $1 == "--help" || $1 == "-h" ]]
 then
   echo 'Uso: ./run usuario base [gerar_dados] [resetar_base]'
@@ -85,3 +95,5 @@ fi
 if [[ $gerar_dados == "true" ]]; then
   gera_dados_ficticios
 fi
+
+roda_selects
