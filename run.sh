@@ -8,6 +8,7 @@ resetar_base=$4;
 cria_tabelas_visoes_procedures() {
   sqls=(
     'create/create_tables.sql'
+    'views/vClientesRecorrentes.sql'
   )
 
   for sql in ${sqls[@]}; do
