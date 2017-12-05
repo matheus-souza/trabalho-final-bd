@@ -9,6 +9,7 @@ cria_tabelas_visoes_procedures() {
   sqls=(
     'create/create_tables.sql'
     'views/vClientesRecorrentes.sql'
+    'functions/fGeraVezesReservadas.sql'
   )
 
   for sql in ${sqls[@]}; do
