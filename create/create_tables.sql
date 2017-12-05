@@ -40,6 +40,7 @@ CREATE TABLE email (
 CREATE TABLE pessoa (
     idpessoa serial NOT NULL,
     idendereco int NOT NULL,
+    vezes_reservadas int,
     PRIMARY KEY (idpessoa)
 );
 
