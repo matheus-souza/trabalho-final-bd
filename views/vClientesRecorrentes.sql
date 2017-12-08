@@ -1,5 +1,6 @@
 CREATE OR REPLACE VIEW clientes_recorrentes AS
-   SELECT CASE WHEN nome IS NOT NULL THEN nome ELSE nome_fantasia END AS nome,
+   SELECT p.idpessoa,
+          CASE WHEN nome IS NOT NULL THEN nome ELSE nome_fantasia END AS nome,
           p.vezes_reservadas
      FROM pessoa p
 LEFT JOIN fisica f
