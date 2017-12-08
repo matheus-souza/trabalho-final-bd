@@ -29,3 +29,5 @@ BEGIN
 END;
 $BODY$
 LANGUAGE plpgsql;
+
+update reservas set idpessoa = idpessoa where idpessoa = 1;
