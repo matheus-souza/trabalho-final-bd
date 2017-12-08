@@ -10,6 +10,7 @@ cria_tabelas_visoes_procedures() {
     'create/create_tables.sql'
     'views/vClientesRecorrentes.sql'
     'functions/fGeraVezesReservadas.sql'
+    'triggers/tGeraVezesReservadas.sql'
   )
 
   for sql in ${sqls[@]}; do
