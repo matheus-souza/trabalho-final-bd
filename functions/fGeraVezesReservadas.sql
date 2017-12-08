@@ -1,5 +1,5 @@
 CREATE OR REPLACE FUNCTION geraVezesReservadas()
-RETURNS boolean AS
+RETURNS trigger AS
 $BODY$
 /**
  * Realiza os inserts na pessoa e pessoa_fisica
@@ -25,7 +25,7 @@ BEGIN
         v_count := v_count+1;
     END LOOP;
     CLOSE v_cur_pessoa;
-    RETURN true;
+    RETURN null;
 END;
 $BODY$
 LANGUAGE plpgsql;
