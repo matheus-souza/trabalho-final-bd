@@ -5,10 +5,9 @@ base=$2;
 gerar_dados=$3;
 resetar_base=$4;
 
-cria_tabelas_visoes_procedures() {
+cria_tabelas_procedures() {
   sqls=(
     'create/create_tables.sql'
-    'views/vClientesRecorrentes.sql'
     'functions/fGeraVezesReservadas.sql'
     'triggers/tGeraVezesReservadas.sql'
   )
@@ -60,8 +59,10 @@ gera_dados_ficticios() {
   done
 }
 
-roda_selects() {
+roda_selects_views() {
   sqls_selects=(
+    'views/vClientesRecorrentes.sql'
+    'views/vAnosFiscais.sql'
     'selects/selects.sql'
   )
 
@@ -92,11 +93,11 @@ if [[ $resetar_base == "true" ]]; then
   dropdb -U${usuario} ${base};
   echo "Criando base ${base}"
   createdb -U${usuario} ${base};
-  cria_tabelas_visoes_procedures
+  cria_tabelas_procedures
 fi
 
 if [[ $gerar_dados == "true" ]]; then
   gera_dados_ficticios
 fi
 
-roda_selects
+roda_selects_views
