@@ -63,6 +63,7 @@ roda_selects_views() {
   sqls_selects=(
     'views/vClientesRecorrentes.sql'
     'views/vAnosFiscais.sql'
+    'views/vEnviarPromocoesEmail.sql'
     'selects/selects.sql'
   )
 
