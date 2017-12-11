@@ -10,7 +10,7 @@
   - Utilizar junção LEFT ou RIGHT JOIN em pelo menos duas das consultas.
   - No mínimo três consultas devem realizar operações com GROUP BY.
   - Em três consultas, apresentar operações com subconsultas, que podem ser realizadas utilizando IN, ALL, EXISTS, SOME.
-- [ ] Criar três visões (VIEW), ou mais, e utilizar as mesmas em outras consultas. 
+- [x] Criar três visões (VIEW), ou mais, e utilizar as mesmas em outras consultas. 
  - As visões desenvolvidas não contam como uma das 10 consultas sugeridas.
 
 - [ ] Descrever textualmente o que faz cada trigger, procedure.
