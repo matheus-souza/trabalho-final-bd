@@ -32,7 +32,7 @@ BEGIN
             AND EXISTS (SELECT idtmp_nome FROM tmp_nome WHERE idtmp_nome = v_random_razao_social)
         THEN
         BEGIN
-            INSERT INTO pessoa (idendereco) VALUES (v_random_endereco) RETURNING idpessoa INTO v_idpessoa;
+            INSERT INTO pessoa (idendereco, criacao) VALUES (v_random_endereco, now()) RETURNING idpessoa INTO v_idpessoa;
             v_data_fundacao := (SELECT cast(now() - '100 year'::interval * random() as date));
             INSERT INTO juridica (idpessoa, iddocumento, nome_fantasia, razao_social, data_fundacao)
             VALUES (v_idpessoa, v_random_documento, (SELECT valor FROM tmp_nome WHERE idtmp_nome = v_random_nome_fantasia), (SELECT valor FROM tmp_nome WHERE idtmp_nome = v_random_razao_social), v_data_fundacao);

@@ -41,6 +41,8 @@ CREATE TABLE pessoa (
     idpessoa serial NOT NULL,
     idendereco int NOT NULL,
     vezes_reservadas int,
+    criacao timestamp,
+    edicao timestamp,
     PRIMARY KEY (idpessoa)
 );
 
