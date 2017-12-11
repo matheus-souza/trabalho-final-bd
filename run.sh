@@ -8,7 +8,6 @@ resetar_base=$4;
 cria_tabelas_procedures() {
   sqls=(
     'create/create_tables.sql'
-    'functions/fGeraVezesReservadas.sql'
     'triggers/tGeraVezesReservadas.sql'
   )
 
