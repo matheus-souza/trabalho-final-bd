@@ -127,6 +127,13 @@ CREATE TABLE reservas_has_servicos (
     PRIMARY KEY (idreservas)
 );
 
+CREATE TABLE dados_remanescentes (
+    iddados_remanescentes serial NOT NULL,
+    nome varchar,
+    telefone varchar,
+    email varchar
+);
+
 ALTER TABLE estado ADD CONSTRAINT pais_estado_fk FOREIGN KEY (idpais) REFERENCES pais(idpais);
 
 ALTER TABLE cidade ADD CONSTRAINT estado_cidade_fk FOREIGN KEY (idestado) REFERENCES estado(idestado);
