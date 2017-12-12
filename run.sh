@@ -9,6 +9,7 @@ cria_tabelas_procedures() {
   sqls=(
     'create/create_tables.sql'
     'triggers/tGeraVezesReservadas.sql'
+    'triggers/tEdicaoPessoa.sql'
   )
 
   for sql in ${sqls[@]}; do
