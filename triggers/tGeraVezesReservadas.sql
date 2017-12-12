@@ -30,6 +30,7 @@ END;
 $BODY$
 LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS gera_vezes_reservadas ON reservas;
 CREATE TRIGGER gera_vezes_reservadas
 AFTER INSERT OR DELETE ON reservas
 FOR EACH ROW
