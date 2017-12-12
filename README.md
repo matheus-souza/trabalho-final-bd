@@ -18,5 +18,5 @@
 - [x] Criar uma procedure que utilize um cursor para ler dados de uma ou mais tabelas e atualizar dados em outra. 
 - [ ] Criar duas procedures que recebam parâmetros, executem consulta baseada nestes parâmetros e retorne os dados da consulta.
  - Estas procedures devem ser utilizadas posteriormente em outra consulta na cláusula FROM.
-- [ ] Criar três triggers.
+- [x] Criar três triggers.
  - Uma das triggers deve ser executada quando é realizado insert e update e outra quando ocorrer operação delete.
