@@ -94,6 +94,8 @@ if [[ $resetar_base == "true" ]]; then
   dropdb -U${usuario} ${base};
   echo "Criando base ${base}"
   createdb -U${usuario} ${base};
+  echo "Criando extensão hstore"
+  psql template1 -c 'create extension if not exists hstore;' -U${usuario}
   cria_tabelas_procedures
 fi
 
