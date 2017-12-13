@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION geraEmail(p_quantidade integer)
 RETURNS boolean AS
 $BODY$
 /**
- * Realiza os inserts na tabela documentos
+ * Realiza os inserts na tabela email
  **/
 DECLARE
     v_count integer;

@@ -1,6 +1,9 @@
 CREATE TYPE t_reserva
 AS (quantidade_reservas integer);
 
+/**
+ * Lista quantidade de reservas feitas para um determinado servico
+ **/
 CREATE OR REPLACE FUNCTION quantidadeReservasPorServico(p_servico integer)
 RETURNS SETOF t_reserva
 AS $$

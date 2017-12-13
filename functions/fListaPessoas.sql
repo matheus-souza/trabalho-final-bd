@@ -1,6 +1,9 @@
 CREATE TYPE t_pessoa
 AS (idpessoa integer, nome varchar, criacao timestamp, edicao timestamp);
 
+/**
+ * Lista todas as pessoas ou somente as editadas
+ **/
 CREATE OR REPLACE FUNCTION listaPessoas(p_alteradas boolean default false)
 RETURNS SETOF t_pessoa
 AS $$
