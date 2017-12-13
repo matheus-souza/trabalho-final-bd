@@ -12,6 +12,7 @@ cria_tabelas_procedures() {
     'triggers/tEdicaoPessoa.sql'
     'triggers/tDeletaDadosPessoa.sql'
     'functions/fListaPessoas.sql'
+    'functions/fQuantidadeReservasPorServico.sql'
   )
 
   for sql in ${sqls[@]}; do
