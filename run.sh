@@ -11,6 +11,7 @@ cria_tabelas_procedures() {
     'triggers/tGeraVezesReservadas.sql'
     'triggers/tEdicaoPessoa.sql'
     'triggers/tDeletaDadosPessoa.sql'
+    'functions/fListaPessoas.sql'
   )
 
   for sql in ${sqls[@]}; do
