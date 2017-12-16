@@ -4,15 +4,18 @@ usuario=$1;
 base=$2;
 gerar_dados=$3;
 resetar_base=$4;
+#Se rodar com Docker necessário passar o caminho completo do arquivo
+diretorio=$5;
+
 
 cria_tabelas_procedures() {
   sqls=(
-    'create/create_tables.sql'
-    'triggers/tGeraVezesReservadas.sql'
-    'triggers/tEdicaoPessoa.sql'
-    'triggers/tDeletaDadosPessoa.sql'
-    'functions/fListaPessoas.sql'
-    'functions/fQuantidadeReservasPorServico.sql'
+    ${diretorio}'create/create_tables.sql'
+    ${diretorio}'triggers/tGeraVezesReservadas.sql'
+    ${diretorio}'triggers/tEdicaoPessoa.sql'
+    ${diretorio}'triggers/tDeletaDadosPessoa.sql'
+    ${diretorio}'functions/fListaPessoas.sql'
+    ${diretorio}'functions/fQuantidadeReservasPorServico.sql'
   )
 
   for sql in ${sqls[@]}; do
@@ -23,11 +26,11 @@ cria_tabelas_procedures() {
 gera_dados_ficticios() {
   # Lista tabelas com dados ficticios para uso
   sqls_tmp=(
-    'generatedata/tmp/tmp_documento_valor.sql'
-    'generatedata/tmp/tmp_endereco.sql'
-    'generatedata/tmp/tmp_nome.sql'
-    'generatedata/tmp/tmp_email.sql'
-    'generatedata/tmp/tmp_telefone.sql'
+    ${diretorio}'generatedata/tmp/tmp_documento_valor.sql'
+    ${diretorio}'generatedata/tmp/tmp_endereco.sql'
+    ${diretorio}'generatedata/tmp/tmp_nome.sql'
+    ${diretorio}'generatedata/tmp/tmp_email.sql'
+    ${diretorio}'generatedata/tmp/tmp_telefone.sql'
   )
   for sql_tmp in ${sqls_tmp[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_tmp[@]}
@@ -35,27 +38,27 @@ gera_dados_ficticios() {
 
   # Lista de sqls para a geração de dados ficticios
   sqls_dados=(
-    'generatedata/tipo_documento.sql'
-    'generatedata/functions/fGeraDocumentos.sql'
-    'generatedata/documento.sql'
-    'generatedata/pais.sql'
-    'generatedata/estado.sql'
-    'generatedata/cidade.sql'
-    'generatedata/functions/fGeraEnderecos.sql'
-    'generatedata/endereco.sql'
-    'generatedata/servicos.sql'
-    'generatedata/dia_atendimento.sql'
-    'generatedata/horario_atendimento.sql'
-    'generatedata/functions/fGeraPessoaFisica.sql'
-    'generatedata/pessoa_fisica.sql'
-    'generatedata/functions/fGeraPessoaJuridica.sql'
-    'generatedata/pessoa_juridica.sql'
-    'generatedata/functions/fGeraEmails.sql'
-    'generatedata/email.sql'
-    'generatedata/functions/fGeraTelefones.sql'
-    'generatedata/telefone.sql'
-    'generatedata/functions/fGeraReservas.sql'
-    'generatedata/reservas.sql'
+    ${diretorio}'generatedata/tipo_documento.sql'
+    ${diretorio}'generatedata/functions/fGeraDocumentos.sql'
+    ${diretorio}'generatedata/documento.sql'
+    ${diretorio}'generatedata/pais.sql'
+    ${diretorio}'generatedata/estado.sql'
+    ${diretorio}'generatedata/cidade.sql'
+    ${diretorio}'generatedata/functions/fGeraEnderecos.sql'
+    ${diretorio}'generatedata/endereco.sql'
+    ${diretorio}'generatedata/servicos.sql'
+    ${diretorio}'generatedata/dia_atendimento.sql'
+    ${diretorio}'generatedata/horario_atendimento.sql'
+    ${diretorio}'generatedata/functions/fGeraPessoaFisica.sql'
+    ${diretorio}'generatedata/pessoa_fisica.sql'
+    ${diretorio}'generatedata/functions/fGeraPessoaJuridica.sql'
+    ${diretorio}'generatedata/pessoa_juridica.sql'
+    ${diretorio}'generatedata/functions/fGeraEmails.sql'
+    ${diretorio}'generatedata/email.sql'
+    ${diretorio}'generatedata/functions/fGeraTelefones.sql'
+    ${diretorio}'generatedata/telefone.sql'
+    ${diretorio}'generatedata/functions/fGeraReservas.sql'
+    ${diretorio}'generatedata/reservas.sql'
   )
   for sql_dado in ${sqls_dados[@]}; do
     psql -U${usuario} -d ${base} -a -f ${sql_dado[@]}
@@ -64,11 +67,11 @@ gera_dados_ficticios() {
 
 roda_selects_views() {
   sqls_selects=(
-    'views/vClientesRecorrentes.sql'
-    'views/vAnosFiscais.sql'
-    'views/vEnviarPromocoesEmail.sql'
-    'views/vEnviarPromocoesTelefone.sql'
-    'selects/selects.sql'
+    ${diretorio}'views/vClientesRecorrentes.sql'
+    ${diretorio}'views/vAnosFiscais.sql'
+    ${diretorio}'views/vEnviarPromocoesEmail.sql'
+    ${diretorio}'views/vEnviarPromocoesTelefone.sql'
+    ${diretorio}'selects/selects.sql'
   )
 
   for sql_select in ${sqls_selects[@]}; do
