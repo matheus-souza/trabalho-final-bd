@@ -1,0 +1,9 @@
+version: '2'
+services:
+  postgresql:
+    build: .
+    ports:
+      - "5433:5432"
+    volumes:
+    - .:/trabalho-final-bd
+    container_name: trabalho_final_bd
