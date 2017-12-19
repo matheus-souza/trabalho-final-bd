@@ -71,7 +71,6 @@ roda_selects_views() {
     ${diretorio}'views/vAnosFiscais.sql'
     ${diretorio}'views/vEnviarPromocoesEmail.sql'
     ${diretorio}'views/vEnviarPromocoesTelefone.sql'
-    ${diretorio}'selects/selects.sql'
   )
 
   for sql_select in ${sqls_selects[@]}; do
