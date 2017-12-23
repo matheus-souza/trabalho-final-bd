@@ -1,16 +1,17 @@
 ```sql
-select f.nome
-from pessoa p
-inner join fisica f
-on f.idpessoa = p.idpessoa
-inner join email e
-on e.idpessoa = p.idpessoa
-where f.dt_nascimento >= '2000-01-01'
-and e.receber_promocoes is true
-group by f.nome
+SELECT f.nome
+FROM pessoa p
+INNER JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN email e ON e.idpessoa = p.idpessoa
+WHERE f.dt_nascimento >= '2000-01-01'
+  AND e.receber_promocoes IS TRUE
+GROUP BY f.nome
 ```
 ```sql
-select case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
+SELECT CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
        t.telefone,
        CASE da.dia_semana
            WHEN 0 THEN 'Domingo'
@@ -21,43 +22,43 @@ select case when j.idpessoa is not null then j.razao_social else f.nome end as n
            WHEN 5 THEN 'Sexta'
            WHEN 6 THEN 'Sábado'
        END AS dia_semana
-from pessoa p
-inner join telefone t
-using (idpessoa)
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join fisica f
-on f.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join dia_atendimento da
-on da.iddia_atendimento = r.iddia_atendimento
-where r.idreservas in (select idreservas from reservas where iddia_atendimento = 2)
-and r.hora_inicio > '14:00'
-group by j.idpessoa, j.razao_social, f.nome, t.telefone, dia_semana
+FROM pessoa p
+INNER JOIN telefone t USING (idpessoa)
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN dia_atendimento da ON da.iddia_atendimento = r.iddia_atendimento
+WHERE r.idreservas IN
+    (SELECT idreservas
+     FROM reservas
+     WHERE iddia_atendimento = 2)
+  AND r.hora_inicio > '14:00'
+GROUP BY j.idpessoa,
+         j.razao_social,
+         f.nome,
+         t.telefone,
+         dia_semana
 ```
 ```sql
-select sum(s.valor) as valor_agosto_2016
-from pessoa p
-inner join telefone t
-using (idpessoa)
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join fisica f
-on f.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join reservas_has_servicos rs
-on rs.idreservas = r.idreservas
-inner  join servicos s
-on s.idservicos = rs.idservicos
-where r.data_atendimento > '2016-08-01'
-and r.data_atendimento < '2016-08-31'
+SELECT sum(s.valor) AS valor_agosto_2016
+FROM pessoa p
+INNER JOIN telefone t USING (idpessoa)
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN reservas_has_servicos rs ON rs.idreservas = r.idreservas
+INNER  JOIN servicos s ON s.idservicos = rs.idservicos
+WHERE r.data_atendimento > '2016-08-01'
+  AND r.data_atendimento < '2016-08-31'
 ```
 ```sql
-select p.idpessoa,
-       case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
-       CASE EXTRACT( DOW FROM r.data_atendimento)
+SELECT p.idpessoa,
+       CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
+       CASE EXTRACT(DOW
+                    FROM r.data_atendimento)
            WHEN 0 THEN 'Domingo'
            WHEN 1 THEN 'Segunda'
            WHEN 2 THEN 'Terça'
@@ -67,135 +68,148 @@ select p.idpessoa,
            WHEN 6 THEN 'Sábado'
        END AS dia_semana,
        r.data_atendimento,
-       sum(s.valor) as valor,
-       r.hora_inicio as hora_reserva
-from pessoa p
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join fisica f
-on f.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join email e
-on e.idpessoa = p.idpessoa
-inner join reservas_has_servicos rs
-on rs.idreservas = r.idreservas
-inner join servicos s
-on s.idservicos = rs.idservicos
-where (select count(*) from reservas where idpessoa = p.idpessoa) = 1
-and r.data_atendimento >= '2016-01-01'
-and r.data_atendimento <= all (select data_atendimento from reservas inner join pessoa on pessoa.idpessoa = reservas.idpessoa 
-                               where data_atendimento >= '2016-01-01' and (select count(*) from reservas where idpessoa = pessoa.idpessoa) = 1)
-group by p.idpessoa, j.idpessoa, f.nome, r.data_atendimento, r.hora_inicio
+       sum(s.valor) AS valor,
+       r.hora_inicio AS hora_reserva
+FROM pessoa p
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN email e ON e.idpessoa = p.idpessoa
+INNER JOIN reservas_has_servicos rs ON rs.idreservas = r.idreservas
+INNER JOIN servicos s ON s.idservicos = rs.idservicos
+WHERE
+    (SELECT count(*)
+     FROM reservas
+     WHERE idpessoa = p.idpessoa) = 1
+  AND r.data_atendimento >= '2016-01-01'
+  AND r.data_atendimento <= ALL
+    (SELECT data_atendimento
+     FROM reservas
+     INNER JOIN pessoa ON pessoa.idpessoa = reservas.idpessoa
+     WHERE data_atendimento >= '2016-01-01'
+       AND
+         (SELECT count(*)
+          FROM reservas
+          WHERE idpessoa = pessoa.idpessoa) = 1)
+GROUP BY p.idpessoa,
+         j.idpessoa,
+         f.nome,
+         r.data_atendimento,
+         r.hora_inicio
 ```
 ```sql
-select p.idpessoa,
-       case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
+SELECT p.idpessoa,
+       CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
        e.email
-from pessoa p
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join fisica f
-on f.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join email e
-on e.idpessoa = p.idpessoa
-where (select count(*) from reservas where idpessoa = p.idpessoa) > 2
-and e.receber_promocoes is true
-and r.data_atendimento > '2016-06-01'
-group by p.idpessoa, j.idpessoa, f.nome, e.email
+FROM pessoa p
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN email e ON e.idpessoa = p.idpessoa
+WHERE
+    (SELECT count(*)
+     FROM reservas
+     WHERE idpessoa = p.idpessoa) > 2
+  AND e.receber_promocoes IS TRUE
+  AND r.data_atendimento > '2016-06-01'
+GROUP BY p.idpessoa,
+         j.idpessoa,
+         f.nome,
+         e.email
 ```
 ```sql
-select case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
+SELECT CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
        t.receber_promocoes,
        '(' || t.ddd || ')' || t.telefone
-from pessoa p
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join fisica f
-on f.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join telefone t
-on t.idpessoa = p.idpessoa
-where (r.hora_fim - r.hora_inicio) >= all (select hora_fim-hora_inicio from reservas)
-and r.data_atendimento > '2017-06-30'
-and r.data_atendimento < '2017-12-31'
+FROM pessoa p
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN telefone t ON t.idpessoa = p.idpessoa
+WHERE (r.hora_fim - r.hora_inicio) >= ALL
+    (SELECT hora_fim-hora_inicio
+     FROM reservas)
+  AND r.data_atendimento > '2017-06-30'
+  AND r.data_atendimento < '2017-12-31'
 ```
 ```sql
-select count(p.*)
-from pessoa p
-inner join telefone t
-using (idpessoa)
-inner join reservas r
-on r.idpessoa = p.idpessoa
-where p.idpessoa <> all (select idpessoa from reservas where data_atendimento >= '2016-01-01' and data_atendimento <= '2016-06-30')
-and t.operadora = 'BMW'
+SELECT count(p.*)
+FROM pessoa p
+INNER JOIN telefone t USING (idpessoa)
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+WHERE p.idpessoa <> ALL
+    (SELECT idpessoa
+     FROM reservas
+     WHERE data_atendimento >= '2016-01-01'
+       AND data_atendimento <= '2016-06-30')
+  AND t.operadora = 'BMW'
 ```
 ```sql
-select case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
-c.nome as cidade,
-sum(s.valor) as valor
-from pessoa p
-inner join telefone t
-using (idpessoa)
-inner join endereco e
-on e.idendereco = p.idendereco
-inner join cidade c
-on e.idcidade = c.idcidade
-left join fisica f
-on f.idpessoa = p.idpessoa
-left join juridica j
-on j.idpessoa = p.idpessoa
-inner join reservas r
-on r.idpessoa = p.idpessoa
-inner join reservas_has_servicos rs
-on rs.idreservas = r.idreservas
-inner join servicos s
-on s.idservicos = rs.idservicos
-where t.operadora in ('BMW', 'Mercedes-Benz')
-and (select vezes_reservadas from pessoa where idpessoa = p.idpessoa) >= 1
-group by j.idpessoa, f.idpessoa, c.nome
+SELECT CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
+       c.nome AS cidade,
+       sum(s.valor) AS valor
+FROM pessoa p
+INNER JOIN telefone t USING (idpessoa)
+INNER JOIN endereco e ON e.idendereco = p.idendereco
+INNER JOIN cidade c ON e.idcidade = c.idcidade
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+INNER JOIN reservas r ON r.idpessoa = p.idpessoa
+INNER JOIN reservas_has_servicos rs ON rs.idreservas = r.idreservas
+INNER JOIN servicos s ON s.idservicos = rs.idservicos
+WHERE t.operadora IN ('BMW',
+                      'Mercedes-Benz')
+  AND
+    (SELECT vezes_reservadas
+     FROM pessoa
+     WHERE idpessoa = p.idpessoa) >= 1
+GROUP BY j.idpessoa,
+         f.idpessoa,
+         c.nome
 ```
 ```sql
-select j.idpessoa,
+SELECT j.idpessoa,
        j.nome_fantasia,
        d.valor,
        td.descricao
-from pessoa p
-inner join juridica j
-using (idpessoa)
-inner join documento d
-using (iddocumento)
-inner join tipo_documento td
-using (idtipo_documento)
-inner join endereco e
-on p.idendereco = e.idendereco
-inner join cidade c
-using (idcidade)
-where (j.data_fundacao >= '2000-01-01'
-and j.data_fundacao <= '2005-12-31')
-or c.idestado = 23
+FROM pessoa p
+INNER JOIN juridica j USING (idpessoa)
+INNER JOIN documento d USING (iddocumento)
+INNER JOIN tipo_documento td USING (idtipo_documento)
+INNER JOIN endereco e ON p.idendereco = e.idendereco
+INNER JOIN cidade c USING (idcidade)
+WHERE (j.data_fundacao >= '2000-01-01'
+       AND j.data_fundacao <= '2005-12-31')
+  OR c.idestado = 23
 ```
 ```sql
-select case when j.idpessoa is not null then j.razao_social else f.nome end as nome,
+SELECT CASE
+           WHEN j.idpessoa IS NOT NULL THEN j.razao_social
+           ELSE f.nome
+       END AS nome,
        t.telefone,
        e.email
-from reservas r
-inner join pessoa p
-using (idpessoa)
-left join fisica f
-on f.idpessoa = p.idpessoa
-left join juridica j
-on j.idpessoa = p.idpessoa
-left join telefone t
-on t.idpessoa = p.idpessoa
-left join email e
-on e.idpessoa = p.idpessoa
-where r.iddia_atendimento = 2
-and r.hora_inicio < '12:00'
-and r.hora_fim < '12:00'
-and r.data_atendimento between '2017-09-01' and '2017-09-30'
-group by j.idpessoa, f.idpessoa, t.telefone, e.email
+FROM reservas r
+INNER JOIN pessoa p USING (idpessoa)
+LEFT JOIN fisica f ON f.idpessoa = p.idpessoa
+LEFT JOIN juridica j ON j.idpessoa = p.idpessoa
+LEFT JOIN telefone t ON t.idpessoa = p.idpessoa
+LEFT JOIN email e ON e.idpessoa = p.idpessoa
+WHERE r.iddia_atendimento = 2
+  AND r.hora_inicio < '12:00'
+  AND r.hora_fim < '12:00'
+  AND r.data_atendimento BETWEEN '2017-09-01' AND '2017-09-30'
+GROUP BY j.idpessoa,
+         f.idpessoa,
+         t.telefone,
+         e.email
 ```
