@@ -1,3 +1,4 @@
+1. Listar todas as pessoas físicas que tenham data de nascimento após o ano 2000 e que queiram receber promoções em seus e-mails.
 ```sql
 SELECT f.nome
 FROM pessoa p
@@ -7,6 +8,7 @@ WHERE f.dt_nascimento >= '2000-01-01'
   AND e.receber_promocoes IS TRUE
 GROUP BY f.nome
 ```
+2. Listar todas as pessoas físicas que tenham reservas na Quarta-feira após as 02:00 PM, apresentando o seu nome  e telefone de contato.
 ```sql
 SELECT CASE
            WHEN j.idpessoa IS NOT NULL THEN j.razao_social
@@ -39,6 +41,7 @@ GROUP BY j.idpessoa,
          t.telefone,
          dia_semana
 ```
+3. Realizar uma consulta que some os valores arrecadados no mês de Agosto de 2016. Mostrando o valor total na tela.
 ```sql
 SELECT sum(s.valor) AS valor_agosto_2016
 FROM pessoa p
@@ -51,6 +54,7 @@ INNER  JOIN servicos s ON s.idservicos = rs.idservicos
 WHERE r.data_atendimento > '2016-08-01'
   AND r.data_atendimento < '2016-08-31'
 ```
+4. Realizar uma consulta que mostre a primeira pessoa fisica que realizou uma reserva a partir do mês de janeiro de 2016, mostrando o  nome da pessoa, dia da semana, a hora agendada e o valor gasto.
 ```sql
 SELECT p.idpessoa,
        CASE
@@ -97,6 +101,7 @@ GROUP BY p.idpessoa,
          r.data_atendimento,
          r.hora_inicio
 ```
+5. Mostrar a lista de pessoas físicas que possuem mais de duas reservas a partir do segundo semestre de 2016 e que possuem interesse de receber e-mail promocional, mostrando seu código, nome e e-mail.
 ```sql
 SELECT p.idpessoa,
        CASE
@@ -120,6 +125,7 @@ GROUP BY p.idpessoa,
          f.nome,
          e.email
 ```
+6. Mostrar a reserva que possui maior duração no segundo semestre de 2017, mostrando o código, nome e se ela deseja receber promoções por telefone ou não.
 ```sql
 SELECT CASE
            WHEN j.idpessoa IS NOT NULL THEN j.razao_social
@@ -138,6 +144,7 @@ WHERE (r.hora_fim - r.hora_inicio) >= ALL
   AND r.data_atendimento > '2017-06-30'
   AND r.data_atendimento < '2017-12-31'
 ```
+7. Mostrar o total de pessoas que utilizam a operadora BMW e que não tenham realizado nenhuma reserva no primeiro semestre de 2016.
 ```sql
 SELECT count(p.*)
 FROM pessoa p
@@ -150,6 +157,7 @@ WHERE p.idpessoa <> ALL
        AND data_atendimento <= '2016-06-30')
   AND t.operadora = 'BMW'
 ```
+8. Listar o nome das cidades que possuem pessoas que utilizam a operadora BMW e Mercedes-Benz, e que tenham realizado ao menos uma reserva, mostrando a cidade, nome e valor gasto na reserva.
 ```sql
 SELECT CASE
            WHEN j.idpessoa IS NOT NULL THEN j.razao_social
@@ -176,6 +184,7 @@ GROUP BY j.idpessoa,
          f.idpessoa,
          c.nome
 ```
+9. Mostrar o nome fantasia, código e o valor do documento de todas as pessoas jurídicas que possuem data de fundação entre 2000 e 2005 ou que sejam sediadas no estado do Rio Grande do Sul.
 ```sql
 SELECT j.idpessoa,
        j.nome_fantasia,
@@ -191,6 +200,7 @@ WHERE (j.data_fundacao >= '2000-01-01'
        AND j.data_fundacao <= '2005-12-31')
   OR c.idestado = 23
 ```
+10. A empresa X quer desmarcar as reservas no turno da manhã de todas as terças-feiras do mês de setembro de 2017, para isso ela deseja realizar uma consulta que retorne todos os nomes e telefones das pessoas que já tenham marcado uma reserva nesta data, caso as pessoas não tenham a opção de receber promoções pelo telefone o e-mail também deve ser mostrado.
 ```sql
 SELECT CASE
            WHEN j.idpessoa IS NOT NULL THEN j.razao_social
