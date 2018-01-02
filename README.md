@@ -2,7 +2,7 @@
 
 O escopo do trabalho está disponível em [ESCOPO.md](ESCOPO.md)
 
-## Como utilizar
+## Como rodar
 
 ### Máquina local
 Para criar a base com os scripts basta rodar:
