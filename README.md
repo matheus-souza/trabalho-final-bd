@@ -1,5 +1,6 @@
 # Trabalho final de Banco de Dados
  - O escopo do trabalho está disponível em [ESCOPO.md](ESCOPO.md)
+ - O modelo da base está disponível em [modelo_er.pdf](modelo_er.pdf)
  - O arquivo com as consultas está disponível em [CONSULTAS.md](CONSULTAS.md)
 
 
